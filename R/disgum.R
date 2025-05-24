@@ -15,25 +15,22 @@
 #' @name disgum
 
 disgum <- function(x, tr = NULL){
-  if (is.data.frame(x)) {
-    if (ncol(x) == 1) {
+  if(is.data.frame(x)){
+    if(ncol(x) == 2){
+      x <- as.numeric(x[,2])
+    }else if(ncol(x) == 1){
       x <- as.numeric(x)
-      stop("Si 'x' es un data.frame, debe tener al menos dos columnas.")
+    } else {
+      stop("values not defined")
     }
-    x <- x[,2]
-
-  } else if (is.numeric(x)) {
+  } else if(is.numeric(x)){
     x <- x
   } else {
-    stop("El argumento 'x' debe ser un data.frame o un vector numerico.")
+    stop("values not defined")
   }
 
   x <- as.numeric(x)
   x <- na.omit(x)
-
-  if (length(x) == 0) {
-    stop("No hay datos validos para procesar despues de eliminar NA.")
-  }
 
   x <- x * 1.13
   xm <- mean(x)
