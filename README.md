@@ -1,4 +1,4 @@
-# yupana : 
+# yupana : set of tools for analyzing extreme precipitation events
 
 ## 1. Overview
 
