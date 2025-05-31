@@ -65,12 +65,6 @@ dislp3p <- function(x, tr = NULL){
   vae <- c(out2$k[50], out2$k[80], out2$k[90], out2$k[95], out2$k[98], out2$k[99],
            out3$k[199], out4$k[499], out5$k[999])
 
-
-  x <- x[,2]
-  x <- as.numeric(x)
-  x <- na.omit(x)
-  x <- x * 1.13
-
   lnQ <- log(x)
   N <- length(x)
   xm_lp <- mean(lnQ)
