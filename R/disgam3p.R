@@ -74,7 +74,8 @@ disgam3p <- function(x, tr = NULL){
 
   gc <- cs / sqrt(N * (N - 1)) / (N - 2) * (1 + 8.5 / N)
   be <- (2 / gc)^2
-  al <- dst / sqrt(be)
+  #al <- dst / sqrt(be)
+  al <- 1 / (dst / sqrt(be))^2
   y  <- xm - dst * sqrt(be)
 
   Q_pt <- al * be * (1 - 1 / (9 * be) + vae * sqrt(1 / (9 * be)))^3 + y
