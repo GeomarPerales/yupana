@@ -33,9 +33,11 @@ disgam3p <- function(x, tr = NULL){
   x <- x * 1.13
   xm <- mean(x)
   dst <- sd(x)
+  N <- length(x)
   # cs <- e1071::skewness(x, type = 1) ### obs
 
-  cs <- sum((x - xm)^3) / length(x) / (dst^3)
+  #cs <- sum((x - xm)^3) / length(x) / (dst^3)
+  cs <- sum((x - xm)^3) * N / ((N - 1) * (N - 2) * dst^3)
 
   coefs <- list(c = c(2.515517, 0.802853, 0.010328),
                 d = c(1.432788, 0.189269, 0.001308))
@@ -69,7 +71,7 @@ disgam3p <- function(x, tr = NULL){
            k_vals$`4`$k[499], # TR = 500
            k_vals$`5`$k[999]) # TR = 1000
 
-  N <- length(x)
+
   gc <- cs / sqrt(N * (N - 1)) / (N - 2) * (1 + 8.5 / N)
   be <- (2 / gc)^2
   al <- dst / sqrt(be)
