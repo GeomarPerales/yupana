@@ -29,25 +29,13 @@ disgam3p <- function(x, tr = NULL){
     stop("values not defined")
   }
 
-  x <- as.numeric(x)
   x <- na.omit(x)
-
   x <- x * 1.13
   xm <- mean(x)
   dst <- sd(x)
   # cs <- e1071::skewness(x, type = 1) ### obs
-  cv <- xm / dst
 
-  Q <- x
-  lnQ <- log(x)
-  N <- length(Q)
-  sg_lp <- 0
-  for (i in 1:length(Q)){
-    sg_lp <- sg_lp + (lnQ[i]-xm)^3/length(Q)
-  }
-  g_lp <- length(Q)^2*sg_lp/(length(Q)-1)/(length(Q)-2)/dst^3
-
-  cs <- g_lp #fisher asymmetry coefficient
+  cs <- sum((x - xm)^3) / length(x) / (dst^3)
 
   coefs <- list(c = c(2.515517, 0.802853, 0.010328),
                 d = c(1.432788, 0.189269, 0.001308))
@@ -93,7 +81,10 @@ disgam3p <- function(x, tr = NULL){
     return(Q_pt)
   } else {
     match.tr <- match(tr, TR)
-    if (is.na(match.tr)) stop("TR no identificado")
-    return(Q_pt[match.tr])
+    if (is.na(match.tr)){
+      stop("TR no identificado")
+    } else {
+      return(Q_pt[match.tr])
+    }
   }
 }
